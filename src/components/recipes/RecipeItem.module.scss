@@ -1,0 +1,46 @@
+@import "../../assets/styles/colors.scss";
+
+.recipe-card {
+  cursor: pointer;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  margin: 2rem 0 1.5rem;
+  height: calc(100% - 3.5rem);
+  position: relative;
+  padding-bottom: 3.5rem;
+  &__image {
+    text-align: center;
+    img {
+      width: 300px;
+      max-width: 80%;
+      margin-top: -30px;
+      margin-bottom: 1rem;
+      border-radius: 10px;
+      position: relative;
+      top: 0;
+      transition: all 0.5s ease-in-out;
+    }
+  }
+  &__details {
+    text-align: center;
+  }
+  &__title {
+    font-weight: bold;
+    text-transform: capitalize;
+  }
+  &__description {
+    color: $textLight;
+  }
+  &__action {
+    margin-bottom: 1rem;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    margin-left: -65px;
+  }
+  &:hover {
+    .recipe-card__image img {
+      top: 10px;
+    }
+  }
+}
