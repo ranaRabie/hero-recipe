@@ -1,0 +1,13 @@
+// $primary: #626ed4;
+// $secondary: #303049;
+// $white: #fff;
+// $body-bg: #f5f5f5;
+// $body-color: #242934;
+@import "assets/styles/colors.scss";
+@import "~bootstrap/scss/bootstrap";
+
+ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
