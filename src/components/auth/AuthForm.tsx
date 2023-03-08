@@ -6,6 +6,7 @@ import { authActions } from "../../store/auth";
 const AuthForm: React.FC<{ authSubmitHandler: any }> = ({
   authSubmitHandler,
 }) => {
+  const usernameInput = useRef<HTMLInputElement | null>(null);
   const emailInput = useRef<HTMLInputElement | null>(null);
   const passwordInput = useRef<HTMLInputElement | null>(null);
   const dispatch = useDispatch();
@@ -16,7 +17,11 @@ const AuthForm: React.FC<{ authSubmitHandler: any }> = ({
   const authFormSubmitHandler = (e: any) => {
     e.preventDefault();
     if (emailInput.current && passwordInput.current) {
-      authSubmitHandler(emailInput.current.value, passwordInput.current.value);
+      authSubmitHandler(
+        usernameInput?.current?.value,
+        emailInput.current.value,
+        passwordInput.current.value
+      );
     }
   };
 
@@ -25,15 +30,32 @@ const AuthForm: React.FC<{ authSubmitHandler: any }> = ({
   }
 
   return (
-    <>
+    <div>
       <div className="page-header">
         <h2 className="text-center fw-bold mb-4">
           {isLogin ? "Log in" : "Create a new user"}
         </h2>
       </div>
       <form onSubmit={authFormSubmitHandler} className={styles.form}>
-        <p>
-          <label htmlFor="email">Email</label>
+        {!isLogin && (
+          <div className="mb-4">
+            <label htmlFor="email" className="mb-1">
+              User Name
+            </label>
+            <input
+              id="name"
+              type="text"
+              name="email"
+              className="form-control"
+              ref={usernameInput}
+              required
+            />
+          </div>
+        )}
+        <div>
+          <label htmlFor="email" className="mb-1">
+            Email
+          </label>
           <input
             id="email"
             type="email"
@@ -42,9 +64,11 @@ const AuthForm: React.FC<{ authSubmitHandler: any }> = ({
             ref={emailInput}
             required
           />
-        </p>
-        <p>
-          <label htmlFor="image">Password</label>
+        </div>
+        <div className="mt-4">
+          <label htmlFor="image" className="mb-1">
+            Password
+          </label>
           <input
             id="password"
             type="password"
@@ -53,8 +77,11 @@ const AuthForm: React.FC<{ authSubmitHandler: any }> = ({
             ref={passwordInput}
             required
           />
-        </p>
-        <div>
+        </div>
+        <div className="mt-4">
+          <button className="btn btn-primary btn-lg">
+            {isLogin ? "Login" : "Signup"}
+          </button>
           <button
             onClick={switchAuthHandler}
             type="button"
@@ -62,10 +89,9 @@ const AuthForm: React.FC<{ authSubmitHandler: any }> = ({
           >
             {isLogin ? "Create new user" : "Login"}
           </button>
-          <button className="btn btn-primary">Save</button>
         </div>
       </form>
-    </>
+    </div>
   );
 };
 

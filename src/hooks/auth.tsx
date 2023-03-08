@@ -1,33 +1,28 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-export const useCheckForUserToken = (isAuth: any) => {
+export const useCheckForUserToken = (depend: any) => {
   const [isUserLoggedIn, setIsUserLoggedIn] = useState<boolean>(false);
   const user = JSON.parse(localStorage.getItem("user") || "{}");
 
   useEffect(() => {
     if (user && user.idToken) {
-      console.log("user");
-      console.log(user);
       setIsUserLoggedIn((setIsUserLoggedIn) => (setIsUserLoggedIn = true));
     } else {
       setIsUserLoggedIn(false);
     }
-  }, [isAuth]);
+  }, [depend]);
 
   return isUserLoggedIn;
 };
 
-export const logout = () => {
-  localStorage.removeItem("user");
-};
-
-export const signup = async (e: string, p: string) => {
+export const signup = async (n: string, e: string, p: string) => {
   const res = await axios.post(
     "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBqfNpn7RO5qaghsKx6Bt9UExlGGHpPZXI",
     {
       email: e,
       password: p,
+      displayName: n,
       returnSecureToken: true,
     }
   );

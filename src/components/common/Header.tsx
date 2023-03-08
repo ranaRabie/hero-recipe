@@ -2,17 +2,19 @@ import logo from "../../assets/logo-icon.png";
 import slogan from "../../assets/logo-slogan.png";
 import HeaderStyles from "./Header.module.scss";
 import { Link } from "react-router-dom";
-import { useCheckForUserToken, logout } from "../../hooks/auth";
+import { useCheckForUserToken } from "../../hooks/auth";
 import { useSelector, useDispatch } from "react-redux";
 import { authActions } from "../../store/auth";
 
 const Header: React.FC = () => {
   const dispatch = useDispatch();
-  const user = useSelector((state: { auth: { user: {} } }) => state.auth.user);
+  const user = useSelector(
+    (state: { auth: { user: { displayName?: string } } }) => state.auth.user
+  );
   const isUserLoggedIn = useCheckForUserToken(user);
 
   const logUserOut = () => {
-    logout();
+    localStorage.removeItem("user");
     dispatch(authActions.logout());
   };
 
@@ -26,9 +28,12 @@ const Header: React.FC = () => {
           </div>
           <div className={HeaderStyles["main-header__actions"]}>
             {isUserLoggedIn && (
-              <button onClick={logUserOut} className="btn btn-primary">
-                logout
-              </button>
+              <div>
+                <p>welcome "{JSON.stringify(user.displayName)}"</p>
+                <button onClick={logUserOut} className="btn btn-primary">
+                  logout
+                </button>
+              </div>
             )}
             {!isUserLoggedIn && (
               <Link to="/auth" className="btn btn-primary mx-2 text-capitalize">

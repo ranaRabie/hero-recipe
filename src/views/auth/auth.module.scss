@@ -1,0 +1,22 @@
+.auth-page {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  max-width: 800px;
+  margin: 0 auto;
+  min-height: 100vh;
+  > div {
+    padding: 1rem;
+    flex: 0 0 auto;
+    &:first-child {
+      img {
+        width: 100%;
+      }
+    }
+    &:last-child {
+      width: 600px;
+      max-width: 90%;
+      flex: 0 0 70%;
+    }
+  }
+}

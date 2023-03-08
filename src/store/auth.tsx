@@ -15,7 +15,7 @@ const authSlice = createSlice({
     },
     login(state, payload) {
       state.isLogin = state.isLogin;
-      state.user = payload;
+      state.user = payload.payload;
     },
     logout(state) {
       state.isLogin = state.isLogin;
@@ -23,7 +23,7 @@ const authSlice = createSlice({
     },
     signup(state, payload) {
       state.isLogin = state.isLogin;
-      state.user = payload;
+      state.user = payload.payload;
     },
   },
 });

@@ -3,6 +3,8 @@ import { useSelector, useDispatch } from "react-redux";
 import AuthForm from "../../components/auth/AuthForm";
 import { signup, login } from "../../hooks/auth";
 import { authActions } from "../../store/auth";
+import authImage from "../../assets/auth.avif";
+import styles from "./auth.module.scss";
 
 const AuthPage: React.FC = () => {
   const dispatch = useDispatch();
@@ -11,7 +13,11 @@ const AuthPage: React.FC = () => {
     (state: { auth: { isLogin: Boolean } }) => state.auth.isLogin
   );
 
-  const authSubmitHandler = async (email: string, password: string) => {
+  const authSubmitHandler = async (
+    name: string,
+    email: string,
+    password: string
+  ) => {
     if (isLogin) {
       await login(email, password);
       dispatch(
@@ -19,18 +25,23 @@ const AuthPage: React.FC = () => {
       );
       navigate("/");
     } else {
-      await signup(email, password);
+      await signup(name, email, password);
       dispatch(
         authActions.signup(JSON.parse(localStorage.getItem("user") || "{}"))
       );
+      dispatch(authActions.toggleMode());
       navigate("/");
     }
   };
 
   return (
     <>
-      <h1>auth</h1>
-      <AuthForm authSubmitHandler={authSubmitHandler} />
+      <div className={styles["auth-page"]}>
+        <div>
+          <img src={authImage} />
+        </div>
+        <AuthForm authSubmitHandler={authSubmitHandler} />
+      </div>
     </>
   );
 };

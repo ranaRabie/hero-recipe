@@ -6,8 +6,13 @@
 @import "assets/styles/colors.scss";
 @import "~bootstrap/scss/bootstrap";
 
-ul{
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.btn {
+  border-radius: 30px;
+  min-width: 130px;
 }
