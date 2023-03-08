@@ -1,18 +1,12 @@
-import './App.scss';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import routes from './routes';
-import Header from './components/common/Header';
+import "./App.scss";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import routes from "./routes";
 
-function App() {  
+function App() {
   const router = createBrowserRouter(routes);
   return (
     <div className="App">
-      <Header />
-      <main className='main-content py-4'>
-        <div className='container'>
-          <RouterProvider router={router} />
-        </div>
-      </main>
+      <RouterProvider router={router} />
     </div>
   );
 }
