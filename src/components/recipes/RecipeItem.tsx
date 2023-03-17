@@ -4,7 +4,7 @@ import { Recipe } from "../../types/recipes";
 
 interface RecipeProps {
   recipe: Recipe;
-  recipeId: number;
+  recipeId: string;
 }
 
 const RecipeItem: React.FC<RecipeProps> = ({ recipe, recipeId }) => {

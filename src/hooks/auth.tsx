@@ -1,7 +1,11 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
-export const useCheckForUserToken = (depend: any) => {
+export const useCheckForUserToken = () => {
+  const isAuth = useSelector(
+    (state: { auth: { isAuth: Boolean } }) => state.auth.isAuth
+  );
   const [isUserLoggedIn, setIsUserLoggedIn] = useState<boolean>(false);
   const user = JSON.parse(localStorage.getItem("user") || "{}");
 
@@ -11,9 +15,17 @@ export const useCheckForUserToken = (depend: any) => {
     } else {
       setIsUserLoggedIn(false);
     }
-  }, [depend]);
+  }, [isAuth]);
 
   return isUserLoggedIn;
+};
+
+export const getUserData = () => {
+  const user = JSON.parse(localStorage.getItem("user") || "{}");
+  if (user && user.idToken) {
+    return user;
+  }
+  return null;
 };
 
 export const signup = async (n: string, e: string, p: string) => {

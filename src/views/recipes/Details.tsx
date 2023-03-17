@@ -11,6 +11,7 @@ const Details: React.FC = () => {
     const res = await axios.get(
       `https://react-blog-c2e7c-default-rtdb.firebaseio.com/recipes/${params.id}.json`
     );
+    console.log(res);
     setRecipe(res.data);
   };
   useEffect(() => {
