@@ -4,4 +4,5 @@ export type Recipe = {
   description: string;
   ingredients: [];
   directions: string;
+  ownerId?: string;
 };
