@@ -1,0 +1,20 @@
+@import "../../assets/styles/colors.scss";
+
+.main-nav {
+  ul {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    li {
+      a {
+        color: $secondary;
+        text-decoration: none;
+        padding: 0.3rem 0.8rem;
+        &[aria-current] {
+          color: $primary;
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}
