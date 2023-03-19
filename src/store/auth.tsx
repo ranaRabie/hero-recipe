@@ -30,6 +30,11 @@ const authSlice = createSlice({
       state.user = payload.payload;
       state.isAuth = true;
     },
+    editUser(state, payload) {
+      state.isLogin = state.isLogin;
+      state.user = payload.payload;
+      state.isAuth = true;
+    },
   },
 });
 
