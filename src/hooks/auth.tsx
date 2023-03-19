@@ -6,6 +6,9 @@ export const useCheckForUserToken = () => {
   const isAuth = useSelector(
     (state: { auth: { isAuth: Boolean } }) => state.auth.isAuth
   );
+  const userStore = useSelector(
+    (state: { auth: { user: {} } }) => state.auth.user
+  );
   const [isUserLoggedIn, setIsUserLoggedIn] = useState<boolean>(false);
   const user = JSON.parse(localStorage.getItem("user") || "{}");
 
@@ -15,7 +18,7 @@ export const useCheckForUserToken = () => {
     } else {
       setIsUserLoggedIn(false);
     }
-  }, [isAuth]);
+  }, [isAuth, userStore]);
 
   return isUserLoggedIn;
 };
