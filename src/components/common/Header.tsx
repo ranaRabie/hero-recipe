@@ -1,12 +1,14 @@
 import logo from "../../assets/logo-icon.png";
 import slogan from "../../assets/logo-slogan.png";
 import HeaderStyles from "./Header.module.scss";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useCheckForUserToken, getUserData } from "../../hooks/auth";
 import { useDispatch } from "react-redux";
 import { authActions } from "../../store/auth";
+import Nav from "./Nav";
 
 const Header: React.FC = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const isUserLoggedIn = useCheckForUserToken();
   const userData = getUserData();
@@ -14,6 +16,7 @@ const Header: React.FC = () => {
   const logUserOut = () => {
     localStorage.removeItem("user");
     dispatch(authActions.logout());
+    navigate("/");
   };
 
   return (
@@ -24,10 +27,13 @@ const Header: React.FC = () => {
             <img src={logo} />
             <img src={slogan} />
           </div>
+          <div className={HeaderStyles["main-header__nav"]}>
+            <Nav />
+          </div>
           <div className={HeaderStyles["main-header__actions"]}>
             {isUserLoggedIn && (
               <div>
-                <p>welcome "{JSON.stringify(userData?.displayName)}"</p>
+                <p>welcome {userData?.displayName}</p>
                 <button onClick={logUserOut} className="btn btn-primary">
                   logout
                 </button>
