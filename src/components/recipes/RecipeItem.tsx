@@ -5,11 +5,16 @@ import { Recipe } from "../../types/recipes";
 interface RecipeProps {
   recipe: Recipe;
   recipeId: string;
+  wrapperSize?: string;
 }
 
-const RecipeItem: React.FC<RecipeProps> = ({ recipe, recipeId }) => {
+const RecipeItem: React.FC<RecipeProps> = ({
+  recipe,
+  recipeId,
+  wrapperSize,
+}) => {
   return (
-    <li className="col-md-3 ">
+    <li className={wrapperSize === "sm" ? "col-md-4 " : "col-md-3"}>
       <div className={styles["recipe-card"]}>
         <div className={styles["recipe-card__image"]}>
           <img src="https://hips.hearstapps.com/hmg-prod/images/smash-burgers-640277f693e87.jpeg?resize=1200:*" />
@@ -20,7 +25,7 @@ const RecipeItem: React.FC<RecipeProps> = ({ recipe, recipeId }) => {
             {recipe.description}
           </p>
           <Link
-            to={`recipe-details/${recipeId}`}
+            to={`/recipe-details/${recipeId}`}
             className={
               "btn btn-primary text-capitalize " + styles["recipe-card__action"]
             }
